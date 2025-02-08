@@ -1,7 +1,8 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { ARButton, XR, useHitTest } from "@react-three/xr";
+import { DirectionalLight } from "three";
+import { ARButton, XR, useXRHitTest } from "@react-three/xr";
 import { useState, useRef } from "react";
 import { useGLTF, Plane } from "@react-three/drei";
 import { useGesture } from "@use-gesture/react";
@@ -29,15 +30,15 @@ function Furniture({ position }: { position: [number, number, number] }) {
     { target: furnitureRef }
   );
 
-  return <primitive ref={furnitureRef} object={scene} position={position} />;
+  return <group ref={furnitureRef} position={position}><primitive object={scene} /></group>;
 }
 
 // Component to handle AR hit test and placement
 function PlacementHandler({ onPlace }: { onPlace: (pos: [number, number, number]) => void }) {
   const ref = useRef<THREE.Mesh>(null);
-  useHitTest((hitMatrix) => {
+  useXRHitTest((hitMatrix) => {
     if (ref.current) {
-      hitMatrix.decompose(ref.current.position, new THREE.Quaternion(), new THREE.Vector3());
+      hitMatrix[0].decompose(ref.current.position, new THREE.Quaternion(), new THREE.Vector3());
     }
   });
 
@@ -63,7 +64,7 @@ export default function Page() {
       <Canvas className="w-full h-screen">
         <XR>
           <ambientLight intensity={0.5} />
-          <directionalLight position={[2, 5, 2]} intensity={1} />
+          <DirectionalLight position={[2, 5, 2]} intensity={1} />
           <PlacementHandler onPlace={(pos) => setPlacedObjects([...placedObjects, pos])} />
           {placedObjects.map((pos, index) => (
             <Furniture key={index} position={pos} />
