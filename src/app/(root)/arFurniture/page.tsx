@@ -1,76 +1,56 @@
-"use client";
+import { ModelGrid } from "@/components/model-grid"
 
-import { Canvas } from "@react-three/fiber";
-import { DirectionalLight } from "three";
-import { ARButton, XR, useXRHitTest } from "@react-three/xr";
-import { useState, useRef } from "react";
-import { useGLTF, Plane } from "@react-three/drei";
-import { useGesture } from "@use-gesture/react";
-import * as THREE from "three";
+const models = [
+  {
+    id: "1",
+    type: "Chair",
+    name: "Pergevö",
+    url: "/models/chair-red.glb",
+  },
+  {
+    id: "2",
+    type: "Big sofa",
+    name: "Mi(love)wicz",
+    url: "/models/big-sofa.glb",
+  },
+  {
+    id: "3",
+    type: "Small Sofa",
+    name: "BigMouth",
+    url: "/models/small-sofa.glb",
+  },
+  {
+    id: "4",
+    type: "Chair",
+    name: "Inkwizytor3000",
+    url: "/models/chair-black.glb",
+  },
+  {
+    id: "5",
+    type: "Coffee table",
+    name: "Apache Kawka",
+    url: "/models/coffee-table.glb",
+  },
+  {
+    id: "6",
+    type: "Commode",
+    name: "NaCzarnaGodzine",
+    url: "/models/commode.glb",
+  },
+  {
+    id: "7",
+    type: "Wardrobe",
+    name: "Wspólłokator",
+    url: "/models/wardrobe.glb",
+  },
+  {
+    id: "8",
+    type: "Rug",
+    name: "Kumpel Pluskwa",
+    url: "/models/rug.glb",
+  },
+]
 
-// Load furniture model
-function Furniture({ position }: { position: [number, number, number] }) {
-  const { scene } = useGLTF("/models/sofa.glb"); // Replace with actual path
-  const furnitureRef = useRef<THREE.Group>(null);
-
-  // Gesture control for movement and rotation
-  useGesture(
-    {
-      onDrag: ({ offset: [x, z] }) => {
-        if (furnitureRef.current) {
-          furnitureRef.current.position.set(x / 10, 0, z / 10);
-        }
-      },
-      onPinch: ({ offset: [scale] }) => {
-        if (furnitureRef.current) {
-          furnitureRef.current.scale.set(scale, scale, scale);
-        }
-      },
-    },
-    { target: furnitureRef }
-  );
-
-  return <group ref={furnitureRef} position={position}><primitive object={scene} /></group>;
-}
-
-// Component to handle AR hit test and placement
-function PlacementHandler({ onPlace }: { onPlace: (pos: [number, number, number]) => void }) {
-  const ref = useRef<THREE.Mesh>(null);
-  useXRHitTest((hitMatrix) => {
-    if (ref.current) {
-      hitMatrix[0].decompose(ref.current.position, new THREE.Quaternion(), new THREE.Vector3());
-    }
-  });
-
-  return (
-    <mesh
-      ref={ref}
-      onClick={() => ref.current && onPlace([ref.current.position.x, 0, ref.current.position.z])}
-    >
-      <planeGeometry args={[0.2, 0.2]} />
-      <meshBasicMaterial color="blue" transparent opacity={0.5} />
-    </mesh>
-  );
-}
-
-// Main Page
-export default function Page() {
-  const [placedObjects, setPlacedObjects] = useState<[number, number, number][]>([]);
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h1 className="text-2xl font-semibold my-4">AR-Based Furniture Placement</h1>
-      <ARButton className="px-4 py-2 bg-blue-500 rounded-lg text-white font-medium">Enter AR</ARButton>
-      <Canvas className="w-full h-screen">
-        <XR>
-          <ambientLight intensity={0.5} />
-          <DirectionalLight position={[2, 5, 2]} intensity={1} />
-          <PlacementHandler onPlace={(pos) => setPlacedObjects([...placedObjects, pos])} />
-          {placedObjects.map((pos, index) => (
-            <Furniture key={index} position={pos} />
-          ))}
-        </XR>
-      </Canvas>
-    </div>
-  );
+export default function ModelsPage() {
+  return <ModelGrid models={models} />
 }
