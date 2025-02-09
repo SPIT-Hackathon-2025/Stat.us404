@@ -1,7 +1,7 @@
 "use client"
 
 import { Canvas, useThree } from "@react-three/fiber"
-// import { Primitive } from "@react-three/drei"
+import { Primitive } from "@react-three/drei"
 import { OrbitControls, Stage } from "@react-three/drei"
 import { useGLTF } from "@react-three/drei"
 
