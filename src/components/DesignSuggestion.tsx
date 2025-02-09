@@ -10,7 +10,7 @@ interface DesignSuggestionProps {
           <p className="text-gray-700 whitespace-pre-wrap">{suggestion}</p>
         ) : (
           <p className="text-gray-500 italic">
-            Upload room images and click "Get Design Suggestions" to receive AI-generated interior design ideas.
+            Upload room images and click &quot;Get Design Suggestions&quot; to receive AI-generated interior design ideas.
           </p>
         )}
       </div>

@@ -6,7 +6,6 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent } from "../components/ui/dialog"
-import { ModelViewer } from "./model-viewer"
 
 interface ModelItem {
   id: string
@@ -57,7 +56,6 @@ export function ModelGrid({ models }: ModelGridProps) {
           {filteredModels.map((model) => (
             <div key={model.id} className="bg-white rounded-lg overflow-hidden border shadow-sm group relative">
               <div className="aspect-square relative">
-                <ModelViewer url={model.url} isPreview />
                 <Button
                   variant="ghost"
                   size="icon"
@@ -91,7 +89,6 @@ export function ModelGrid({ models }: ModelGridProps) {
                 </Button>
               </div>
               <div className="flex-1 bg-gray-50">
-                <ModelViewer url={selectedModel.url} />
               </div>
             </div>
           )}

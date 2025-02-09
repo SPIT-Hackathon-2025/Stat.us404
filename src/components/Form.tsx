@@ -145,7 +145,7 @@ const Form: React.FC<FormProps> = ({ type }) => {
               ) : (
                 <Link href="/register">
                   <p className="mt-4 text-zinc-600 hover:underline">
-                    Don't have an account?{" "}
+                    Don&apos;t have an account?{" "}
                     <span className="font-medium">Register here</span>
                   </p>
                 </Link>
