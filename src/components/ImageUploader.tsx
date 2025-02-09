@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import { Camera, Upload } from "lucide-react"
+import Image from "next/image"
 
 interface ImageUploaderProps {
   angle: string
@@ -31,10 +32,12 @@ export default function ImageUploader({ angle, onImageUpload }: ImageUploaderPro
         className="w-full h-40 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition-colors"
       >
         {preview ? (
-          <img
+          <Image
             src={preview || "/placeholder.svg"}
             alt={`${angle} view`}
             className="w-full h-full object-cover rounded-md"
+            height={50}
+            width={50}
           />
         ) : (
           <>

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+
+import { Part } from "@google/generative-ai";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(req: NextRequest) {
@@ -14,17 +16,20 @@ export async function POST(req: NextRequest) {
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-    
+
     // Construct input parts
-    const inputParts: any[] = [{ text: userInput }];
-    
+    const inputParts: (string | Part)[] = [{ text: userInput }];
+
     if (imageBase64) {
-      inputParts.push({ inlineData: { data: imageBase64, mimeType: "image/jpeg" } });
+      inputParts.push({
+        inlineData: { data: imageBase64, mimeType: "image/jpeg" },
+      });
     }
-    
+
     const result = await model.generateContent(inputParts);
     const response = await result.response;
-    const generatedText = (await response.text()) || "Sorry, I couldn't generate content.";
+    const generatedText =
+      (await response.text()) || "Sorry, I couldn't generate content.";
 
     return NextResponse.json({ generatedText });
   } catch (error) {
