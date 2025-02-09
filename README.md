@@ -44,16 +44,3 @@ Plan-it is a next-generation interior design and architectural planning app that
 | OpenCV | Computer vision for room scanning |  
 | Three.js | 3D rendering for interactive floor plans |  
 | ARKit / ARCore | Augmented reality for furniture placement |  
-
-## 📊 System Architecture  
-
-<div align="center">
-  <img src="" alt="System Architecture" width="100%" />
-</div>  
-
-## 🚀 Getting Started  
-
-### Install  
-
-```bash
-pnpm install
