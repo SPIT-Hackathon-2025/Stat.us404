@@ -1,13 +1,13 @@
 "use client"
 
 import { Canvas, useThree } from "@react-three/fiber"
-import { Primitive } from "@react-three/drei"
+// import { Primitive } from "@react-three/drei"
 import { OrbitControls, Stage } from "@react-three/drei"
 import { useGLTF } from "@react-three/drei"
 
 function Model({ url }: { url: string }) {
+  const { scene } = useGLTF(url)
   return <Primitive object={scene} />
-  return <primitive object={scene} />
 }
 
 interface ModelViewerProps {
