@@ -1,8 +1,12 @@
 import React from 'react'
+import Chatbot from '@/components/ChatBot'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <h2>hello</h2>
+      <Chatbot />
+    </div>
   )
 }
 
