@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Plan-it</h1>
-  <p><strong>A modern mobile app that transforms any room into an interactive digital workspace using AI-powered room scanning, AR furniture placement, and real-time design insights.</strong></p>
+  <p><strong>A modern application that transforms any room into an interactive digital workspace using AI-powered room scanning, AR furniture placement, and real-time design insights.</strong></p>
 </div>
 
 ## Overview  
